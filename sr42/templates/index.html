@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% autoescape false %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Примеры XSS</title>
+</head>
+<body>
+    <h3>Хранимая XSS</h3>
+    <form method="post">
+        <p>Оставьте отзыв</p>
+        <label for="name">Ваше имя:</label><br>
+        <input type="text" name="name" id="name"><br>
+        <label for="text">Текст:</label><br>
+        <textarea name="text" id="text"></textarea><br>
+        <input type="submit">
+    </form>
+    <p>Отзывы:</p>
+    {% if rews %}
+        {% for rew in rews %}
+        <p>
+            Имя: {{ rew.name }}<br>
+            Текст: {{ rew.text }}
+        </p>
+        {% endfor %}
+    {% else %}
+        <p>Отзывов нет</p>
+    {% endif %}
+    <hr>
+    <h3>Отраженная XSS</h3>
+    <form method="get">
+        <label for="name2">Как вас зовут?</label>
+        <input type="text" id="name2" name="n">
+        <input type="submit">
+    </form>
+    {% if name2 %}
+        <p>Привет, {{ name2 }}</p>
+    {% endif %}
+    <hr>
+   <h3>DOM-based XSS</h3>
+    <p>Нажмите на следующую кнопку для демонстрации DOM-based XSS:</p>
+    <button id="dom-button">Кликни меня</button>
+    <script>
+        // Получаем значение параметра `dom` из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const domValue = urlParams.get('dom');
+
+        // ПРИМЕР УЯЗВИМОГО КОДА: использование event handlers для выполнения скрипта
+        if (domValue) {
+            document.getElementById('dom-button').setAttribute('onclick', domValue);
+        }
+    </script>
+</body>
+</html>
+{% endautoescape %}

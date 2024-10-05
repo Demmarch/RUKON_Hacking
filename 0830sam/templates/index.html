@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% autoescape false %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Примеры XSS</title>
+</head>
+<body>
+    <h3>Хранимая XSS</h3>
+    <form method="post">
+        <p>Оставьте отзыв</p>
+        <label for="name">Ваше имя:</label><br>
+        <input type="text" name="name" id="name">
+        <br>
+        <label for="text">Текст:</label><br>
+        <textarea name="text" id="text"></textarea>
+        <br>
+        <input type="submit">
+    </form>
+    <p>Отзывы:</p>
+    {% if rews %}
+        {% for rew in rews %}
+        <p>
+            Имя: {{ rew.name }}<br>
+            Текст: {{ rew.text }}
+        </p>
+        {% endfor %}
+    {% else %}
+        <p>Отзывов нет :(</p>
+    {% endif %}
+    <hr>
+    <h3>Отраженная XSS</h3>
+    <form method="get">
+        <label for="name2">Как вас зовут?</label>
+        <input type="text" id="name2" name="n">
+        <input type="submit">
+    </form>
+    {% if name2 %}
+        <p>Привет, {{ name2 }}</p>
+    {% endif %}
+    <hr>
+    <h3>DOM-based XSS</h3>
+    <p>Здесь выводится document.write(window.name)</p>
+    <script>
+        document.write(window.name)
+    </script>
+</body>
+</html>
+{% endautoescape %}

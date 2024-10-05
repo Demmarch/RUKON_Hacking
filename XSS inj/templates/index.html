@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Уязвимая страница для XSS</title>
+</head>
+<body>
+    <h1>Добро пожаловать на наш веб-сайт</h1>
+    <p>Это уязвимая веб-страница, которая не санитизирует или экранирует
+    данные, введенные пользователем. Введите свое имя ниже:</p>
+    <!-- Уязвимость XSS: Не санитизирует введенные данные -->
+    <input type="text" id="userInput">
+    <button onclick="displayGreeting()">Отправить</button>
+    <!-- Вывод введенного имени без санитизации -->
+    <p id="greeting"></p>
+    <!-- Уязвимость: JavaScript-код внедрен в текст -->
+    <p>Вам нравится <script>alert("XSS-атака!");</script> безопасность?</p>
+    <script>
+     // Функция для отображения приветствия
+     function displayGreeting() {
+         // Получаем введенное пользователем имя
+         var userName = document.getElementById("userInput").value;
+         // Вставляем введенное имя на страницу без санитизации
+         document.getElementById("greeting").innerHTML = "Привет, " + userName + "!";
+     }
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Dem",
+        "surname": "Marc",
+        "email": "po@po.su",
+        "password": "neparol123"
+    },
+    {
+        "name": "Yr",
+        "surname": "Ar",
+        "email": "fed@yan.ru",
+        "password": "format111"
+    },
+    {
+        "name": "ad",
+        "surname": "dom",
+        "email": "addom@dom.com",
+        "password": "doma444"
+    }
+]

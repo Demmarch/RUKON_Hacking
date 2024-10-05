@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Пароли</title>
+</head>
+<body>
+    <div class="main">
+        <h1>Ваши пароли</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Service</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for password_info in passwords %}
+                <tr>
+                    <td>{{ password_info.id }}</td>
+                    <td>{{ password_info.service }}</td>
+                    <td>{{ password_info.username }}</td>
+                    <td>{{ password_info.password }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3><a href="/add_password">Добавить пароль</a></h3>
+        <h3><a href="/update_password">Обновить пароль</a></h3>
+    </div>
+</body>
+</html>
